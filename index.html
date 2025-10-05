@@ -1,0 +1,279 @@
+<!DOCTYPE html> 
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AV2 Company - Marketing & Tráfego</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Poppins', sans-serif; background: #f9f9f9; color: #333; scroll-behavior: smooth; }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(120deg, #009929, #044112);
+      color: white;
+      text-align: center;
+      padding: 100px 20px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      top: -100px; left: -100px;
+      width: 300px; height: 300px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite alternate;
+    }
+    header img { max-width: 220px; margin-bottom: 20px; animation: slideDown 1.2s ease; }
+    header h1 { font-size: 2.8rem; margin-bottom: 15px; font-weight: 700; line-height: 1.3; animation: fadeIn 1.8s ease; }
+    header p { font-size: 1.2rem; margin-bottom: 25px; opacity: 0.9; animation: fadeUp 2s ease; }
+    header .cta {
+      background: white; color: #044112;
+      padding: 16px 36px; border-radius: 40px;
+      text-decoration: none; font-weight: 600;
+      transition: 0.4s; display: inline-block; font-size: 1.1rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      animation: pulse 2.5s infinite;
+    }
+    header .cta:hover { background: #009929; color: #fff; transform: scale(1.05); }
+
+    /* SEÇÕES */
+    section { padding: 90px 20px; text-align: center; }
+    h2 {
+      font-size: 2.4rem; margin-bottom: 50px;
+      background: linear-gradient(90deg, #044112, #009929);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      font-weight: 700; letter-spacing: 1px;
+      position: relative; display: inline-block;
+      animation: fadeIn 1.5s ease;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      bottom: -12px; left: 50%;
+      transform: translateX(-50%);
+      width: 60px; height: 4px;
+      background: #009929;
+      border-radius: 2px;
+    }
+
+    /* SERVIÇOS */
+    .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+    .card {
+      background: white; border-radius: 20px; padding: 40px 30px;
+      width: 310px; box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      transition: transform 0.4s, box-shadow 0.4s;
+      animation: fadeUp 1.2s ease forwards; opacity: 0;
+    }
+    .card:hover { transform: translateY(-15px) scale(1.06); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+    .card i { margin-bottom: 18px; font-size: 2.8rem; color: #009929; }
+    .card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 600; }
+    .card p { font-size: 1rem; line-height: 1.5; }
+
+    /* SOBRE */
+    .sobre {
+      position: relative;
+      padding: 100px 20px;
+      text-align: center;
+      background: url("profissional.jpg.jpg") no-repeat center center;
+      background-size: cover;
+    }
+    .sobre::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.85);
+    }
+    .sobre h2, 
+    .sobre .about {
+      position: relative;
+      z-index: 1;
+    }
+    .about { background: #fff; padding: 60px 30px; max-width: 1000px; margin: auto; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.08); animation: fadeIn 1.5s ease; }
+    .about p { font-size: 1.15rem; line-height: 1.7; color: #444; }
+
+    /* PLANOS */
+    .plans { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; }
+    .plan {
+      background: white; border-radius: 20px; padding: 40px 25px;
+      width: 300px; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      transition: 0.4s; animation: fadeUp 1.2s ease forwards; opacity: 0;
+    }
+    .plan:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 12px 28px rgba(0,0,0,0.15); }
+    .plan h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; color: #044112; }
+    .plan p { margin-bottom: 10px; font-size: 0.95rem; }
+    .plan .btn {
+      display: inline-block;
+      background: linear-gradient(90deg,#009929,#044112);
+      color: #fff; padding: 12px 28px; border-radius: 30px;
+      text-decoration: none; font-weight: 600;
+      transition: 0.3s; margin-top: 15px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .plan .btn:hover { background: linear-gradient(90deg,#044112,#009929); transform: scale(1.05); }
+
+    /* DEPOIMENTOS */
+    .testimonials { background: linear-gradient(180deg,#f4faf6,#eef5f0); padding: 90px 20px; }
+    .testimonials .quote {
+      background: white; border-left: 6px solid #009929;
+      padding: 25px 30px; margin: 25px auto; max-width: 750px;
+      font-style: italic; border-radius: 12px;
+      animation: fadeUp 1.2s ease forwards; opacity: 0;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    }
+
+    /* CONTATO */
+    .contact {
+      background: white; padding: 60px 30px;
+      max-width: 850px; margin: auto;
+      border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+    .contact input, .contact textarea {
+      width: 100%; padding: 14px; margin: 12px 0;
+      border: 1px solid #ccc; border-radius: 10px;
+      font-family: 'Poppins', sans-serif; font-size: 1rem;
+    }
+    .contact button {
+      background: linear-gradient(90deg,#009929,#044112);
+      color: white; border: none; padding: 16px 36px;
+      border-radius: 40px; font-weight: 600;
+      cursor: pointer; transition: 0.3s; font-size: 1.05rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    }
+    .contact button:hover { background: linear-gradient(90deg,#044112,#009929); transform: scale(1.05); }
+
+    /* RODAPÉ */
+    footer {
+      background: #044112; color: #fff;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center;
+      padding: 30px 50px; font-size: 14px;
+    }
+    footer .dev a { color: #fff; text-decoration: none; font-weight: 600; }
+    footer .dev a:hover { color: #009929; }
+    footer .social-icons a { color: #fff; font-size: 22px; margin: 0 10px; transition: color 0.3s, transform 0.3s; }
+    footer .social-icons a:hover { color: #009929; transform: scale(1.2); }
+
+    /* ANIMAÇÕES */
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+    @keyframes slideDown { from {transform: translateY(-30px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+    @keyframes fadeUp { from {transform: translateY(30px); opacity: 0;} to {transform: translateY(0); opacity: 1;} }
+    @keyframes float { from {transform: translateY(0);} to {transform: translateY(30px);} }
+    @keyframes pulse { 0%,100% {transform: scale(1);} 50% {transform: scale(1.08);} }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <img src="Design sem nome.png" alt="Logo AV2 Company">
+    <h1>ESCALE SUAS VENDAS COM ANÚNCIOS QUE CONVERTEM</h1>
+    <p>Planejamento estratégico, mídia e criativos orientados a dados para gerar leads qualificados e aumentar suas vendas.</p>
+    <a href="#servicos" class="cta">Conheça nossos serviços</a>
+  </header>
+
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <h2>NOSSOS SERVIÇOS</h2>
+    <div class="features">
+      <div class="card"><i class="fas fa-bullhorn"></i><h3>Marketing Digital</h3><p>Fortaleça sua marca online com campanhas sob medida.</p></div>
+      <div class="card"><i class="fas fa-chart-line"></i><h3>Tráfego Pago</h3><p>Invista em anúncios que realmente convertem.</p></div>
+      <div class="card"><i class="fas fa-share-alt"></i><h3>Social Media</h3><p>Conteúdos criativos para engajar e crescer.</p></div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre">
+    <h2>QUEM SOMOS</h2>
+    <div class="about">
+      <p>
+        A <strong>AV2 Company</strong> é especializada em Marketing Digital, Gestão de Tráfego e Criação de Conteúdo. 
+        Nosso propósito é escalar negócios com estratégias orientadas a dados e criatividade. 
+        Acreditamos no poder da comunicação digital para transformar marcas e aproximar empresas de seus clientes ideais.
+      </p>
+    </div>
+  </section>
+
+  <!-- PLANOS -->
+  <section>
+    <h2>NOSSOS PLANOS</h2>
+    <div class="plans">
+      <div class="plan">
+        <h3>Básico</h3>
+        <p>Ideal para pequenas empresas</p>
+        <p>Gestão de redes sociais</p>
+        <p>2 campanhas de tráfego</p>
+        <p>Relatórios mensais</p>
+        <a href="#contato" class="btn">Saiba Mais</a>
+      </div>
+      <div class="plan">
+        <h3>Profissional</h3>
+        <p>Para empresas em crescimento</p>
+        <p>Gestão completa de redes</p>
+        <p>5 campanhas de tráfego</p>
+        <p>Relatórios semanais</p>
+        <a href="#contato" class="btn">Saiba Mais</a>
+      </div>
+      <div class="plan">
+        <h3>Premium</h3>
+        <p>Resultados em escala</p>
+        <p>Gestão avançada</p>
+        <p>Campanhas ilimitadas</p>
+        <p>Consultoria dedicada</p>
+        <a href="#contato" class="btn">Saiba Mais</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="testimonials">
+    <h2>O QUE DIZEM NOSSOS CLIENTES</h2>
+    <div class="quote">“A AV2 transformou nossas campanhas. Hoje temos muito mais leads e vendas consistentes.” — <b>Cliente A</b></div>
+    <div class="quote">“Profissionalismo, resultados e criatividade. Recomendo a todos que querem crescer online.” — <b>Cliente B</b></div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <h2>FALE CONOSCO</h2>
+    <div class="contact">
+      <form>
+        <input type="text" placeholder="Seu nome" required>
+        <input type="email" placeholder="Seu e-mail" required>
+        <textarea placeholder="Sua mensagem" rows="5" required></textarea>
+        <button type="submit">Enviar Mensagem</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p>© 2025 AV2 COMPANY - TODOS OS DIREITOS RESERVADOS.</p>
+    <p class="dev">Desenvolvido por <a href="https://www.instagram.com/av2company" target="_blank">AV2 Company</a></p>
+    <div class="social-icons">
+      <a href="https://wa.me/5599999999999" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/av2company" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Animações ao scroll
+    const animatedItems = document.querySelectorAll('.card, .quote, .plan');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.opacity = 1;
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, { threshold: 0.2 });
+
+    animatedItems.forEach(item => observer.observe(item));
+  </script>
+
+</body>
+</html>
