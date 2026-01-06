@@ -5,210 +5,199 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AV2COMPANY</title>
 
-<!-- Fontes modernas -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
-
-<!-- Ícones sociais -->
+<!-- FONTES -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
-* {
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(180deg, #0b7a2d, #041f10);
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+body{
+    font-family:'Inter', sans-serif;
+    background: linear-gradient(180deg, #041f10 0%, #0b7a2d 100%);
+    color:#ffffff;
     min-height:100vh;
-    padding:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
 }
 
-/* CONTAINER CENTRAL */
-.wrapper {
+/* CONTAINER */
+.wrapper{
     width:100%;
-    max-width:480px;
-    text-align:center;
-    padding:60px 20px;
-    position:relative;
+    max-width:520px;
 }
 
-/* LINHAS GEOMÉTRICAS ATRÁS DA LOGO */
-.decor {
-    position:absolute;
-    top:50px;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    height:120px;
-    pointer-events:none;
+/* LOGO */
+.logo{
+    margin-bottom:60px;
 }
 
-.decor::before, .decor::after {
-    content:"";
-    position:absolute;
-    width:80%;
-    height:2px;
-    background: rgba(47,232,138,0.25);
-    transform: rotate(-15deg);
-    top:20px;
-    left:10%;
+.logo img{
+    width:140px;
 }
 
-.decor::after {
-    transform: rotate(12deg);
-    top:60px;
+/* LINHA VERTICAL (IDENTIDADE) */
+.identity{
+    display:flex;
+    gap:28px;
 }
 
-/* LOGO COM RELEVO */
-.logo {
-    margin-bottom:30px;
-    display:inline-block;
-    position:relative;
+/* LINHA */
+.identity::before{
+    content:'';
+    width:3px;
+    background: linear-gradient(180deg, #2fe88a, transparent);
+    border-radius:3px;
 }
 
-.logo img {
-    width:160px;
-    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+/* CONTEÚDO */
+.content{
+    flex:1;
 }
 
-/* TÍTULO */
-.title {
-    font-family:'Poppins', sans-serif;
-    font-size:28px;
+/* TITULO */
+.title{
+    font-family:'Sora', sans-serif;
+    font-size:34px;
     font-weight:700;
-    line-height:1.4;
-    margin-bottom:12px;
+    margin-bottom:10px;
+    letter-spacing:0.5px;
 }
 
-/* SUBTÍTULO */
-.subtitle {
+/* DESCRIÇÃO */
+.subtitle{
     font-size:16px;
-    font-weight:500;
-    color:rgba(255,255,255,0.85);
-    margin-bottom:40px;
+    color:rgba(255,255,255,0.8);
     line-height:1.6;
+    margin-bottom:50px;
 }
 
-/* LINKS SOCIAIS DIFERENCIADOS */
-.social-link {
-    background: linear-gradient(145deg, rgba(47,232,138,0.15), rgba(47,232,138,0.05));
-    border-radius:20px;
-    padding:16px 0;
-    backdrop-filter: blur(12px);
-    border:2px solid rgba(47,232,138,0.3);
-    margin-bottom:16px;
-    transition: all 0.4s ease;
+/* LINKS SEM CAIXA */
+.links{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
+    margin-bottom:60px;
 }
 
-.social-link a {
+.links a{
+    text-decoration:none;
+    color:#ffffff;
+    font-size:18px;
+    font-weight:500;
     display:flex;
     align-items:center;
-    justify-content:center;
-    gap:12px;
-    font-size:16px;
+    gap:16px;
+    transition:all 0.3s ease;
+}
+
+.links a i{
+    font-size:20px;
+    color:#2fe88a;
+}
+
+.links a:hover{
+    transform:translateX(6px);
+    color:#2fe88a;
+}
+
+/* CTA */
+.cta a{
+    display:inline-block;
+    font-size:18px;
     font-weight:600;
+    color:#2fe88a;
     text-decoration:none;
-    color:#fff;
-    transition: all 0.3s ease;
+    position:relative;
+    padding-bottom:6px;
 }
 
-.social-link a i {
-    font-size:18px;
+.cta a::after{
+    content:'';
+    position:absolute;
+    left:0;
+    bottom:0;
+    width:0%;
+    height:2px;
+    background:#2fe88a;
+    transition:0.3s ease;
 }
 
-.social-link:hover {
-    background: linear-gradient(145deg, rgba(47,232,138,0.3), rgba(47,232,138,0.1));
-    box-shadow: 0 8px 25px rgba(47,232,138,0.4);
-    transform: translateY(-3px);
+.cta a:hover::after{
+    width:100%;
 }
 
-/* CTA DIFERENCIADO */
-.cta a {
-    display:block;
-    padding:18px 0;
-    font-size:18px;
-    font-weight:700;
-    color:#fff;
-    text-decoration:none;
-    border-radius:24px;
-    background: linear-gradient(135deg, #2fe88a, #1aa156);
-    margin-top:30px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-}
-
-.cta a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(47,232,138,0.6);
-}
-
-/* RODAPÉ */
-footer {
-    margin-top:50px;
-    font-size:13px;
-    color:rgba(255,255,255,0.6);
+/* FOOTER */
+footer{
+    margin-top:70px;
+    font-size:12px;
+    color:rgba(255,255,255,0.5);
 }
 
 /* RESPONSIVO */
-@media(max-width:420px) {
-    .title {
-        font-size:24px;
+@media(max-width:480px){
+    .title{
+        font-size:28px;
     }
 
-    .subtitle {
-        font-size:15px;
-    }
-
-    .cta a {
+    .links a{
         font-size:17px;
     }
 }
 </style>
 </head>
+
 <body>
 
 <div class="wrapper">
-
-    <!-- DECORAÇÃO GEOMÉTRICA -->
-    <div class="decor"></div>
 
     <!-- LOGO -->
     <div class="logo">
         <img src="logo-av2.png.png" alt="AV2COMPANY">
     </div>
 
-    <!-- TÍTULO E SUBTÍTULO -->
-    <div class="title">AV2 COMPANY</div>
-    <div class="subtitle"> Tráfego Pago | Branding | Marcas</div>
+    <div class="identity">
+        <div class="content">
 
-    <!-- LINKS SOCIAIS -->
-    <div class="social-link">
-        <a href="https://instagram.com/av2company" target="_blank"><i class="fab fa-instagram"></i>Instagram</a>
-    </div>
-    <div class="social-link">
-        <a href="https://www.facebook.com/profile.php?id=61586046003964" target="_blank"><i class="fab fa-facebook-f"></i>Facebook</a>
-    </div>
-    <div class="social-link">
-        <a href="https://wa.me/554991864506" target="_blank"><i class="fab fa-whatsapp"></i>WhatsApp</a>
+            <div class="title">AV2 COMPANY</div>
+            <div class="subtitle">
+                Tráfego Pago | Branding | Marcas
+            </div>
+
+            <!-- LINKS -->
+            <div class="links">
+                <a href="https://instagram.com/av2company" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61586046003964" target="_blank">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>
+                <a href="https://wa.me/554991864506" target="_blank">
+                    <i class="fab fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta">
+                <a href="https://wa.me/554991864506" target="_blank">
+                    Falar com um especialista
+                </a>
+            </div>
+
+        </div>
     </div>
 
-    <!-- CTA -->
-    <div class="cta">
-        <a href="https://wa.me/554991864506" target="_blank">Fale com um especialista</a>
-    </div>
-
-    <!-- RODAPÉ -->
-    <footer>©TODOS OS DIREITOS RESERVADOS</footer>
+    <footer>
+        © AV2 I TODOS OS DIREITOS RESERVADOS
+    </footer>
 
 </div>
 
 </body>
 </html>
-
-
