@@ -3,201 +3,787 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AV2COMPANY</title>
-
-<!-- FONTES -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<title>AV2 COMPANY</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+  :root{
+    --navy-950:#0a1128;
+    --navy-900:#0d1b3e;
+    --navy-800:#12234f;
+    --navy-700:#1a2f63;
+    --gold-500:#d6a04a;
+    --gold-400:#e0b366;
+    --white:#ffffff;
+    --ink-700:#3c4257;
+    --ink-500:#6b7280;
+    --ink-300:#c9cdd8;
+    --radius-md:10px;
+    --radius-lg:16px;
+    --shadow-soft:0 10px 30px rgba(10,17,40,.08);
+    --shadow-card:0 4px 20px rgba(10,17,40,.06);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif; color:var(--ink-700); background:var(--white); overflow-x:hidden;}
+  h1,h2,h3,h4,.brand{font-family:'Poppins',sans-serif;}
+  a{text-decoration:none; color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%; display:block;}
+  .container{max-width:1200px; margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    display:inline-block; text-transform:uppercase; letter-spacing:.12em;
+    font-size:.75rem; font-weight:700; color:var(--gold-500); margin-bottom:12px;
+  }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:14px 28px; border-radius:6px; font-weight:600; font-size:.85rem;
+    letter-spacing:.03em; text-transform:uppercase; cursor:pointer; border:2px solid transparent;
+    transition:all .3s cubic-bezier(.4,0,.2,1); position:relative; overflow:hidden;
+  }
+  .btn-gold{ background:var(--gold-500); color:var(--navy-950); }
+  .btn-gold:hover{ background:var(--gold-400); transform:translateY(-3px); box-shadow:0 10px 24px rgba(214,160,74,.4); }
+  .btn-outline{ border-color:rgba(255,255,255,.5); color:#fff; background:transparent; }
+  .btn-outline:hover{ background:rgba(255,255,255,.12); border-color:#fff; transform:translateY(-3px); }
+  .btn-outline-navy{ border-color:var(--navy-900); color:var(--navy-900); background:transparent; }
+  .btn-outline-navy:hover{ background:var(--navy-900); color:#fff; transform:translateY(-3px); }
 
-body{
-    font-family:'Inter', sans-serif;
-    background: linear-gradient(180deg, #041f10 0%, #0b7a2d 100%);
-    color:#ffffff;
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px 20px;
-}
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal-delay-1{transition-delay:.1s;}
+  .reveal-delay-2{transition-delay:.2s;}
+  .reveal-delay-3{transition-delay:.3s;}
+  .reveal-delay-4{transition-delay:.4s;}
 
-/* CONTAINER */
-.wrapper{
-    width:100%;
-    max-width:520px;
-}
+  /* ===== HEADER ===== */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(10,17,40,.75); backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    transition:background .3s ease, padding .3s ease;
+  }
+  header.scrolled{ background:rgba(10,17,40,.96); box-shadow:0 4px 20px rgba(0,0,0,.2); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:18px 24px; max-width:1200px; margin:0 auto; }
+  .logo{ display:flex; align-items:center; gap:10px; color:#fff; }
+  .logo-mark{
+    height:42px; width:auto; max-width:160px; object-fit:contain; flex-shrink:0;
+  }
+  .logo-mark:not([src]){
+    width:42px; background:linear-gradient(135deg,var(--gold-400),var(--gold-500));
+    border-radius:6px;
+  }
+  .nav-links{ display:flex; gap:34px; align-items:center; }
+  .nav-links a{
+    color:rgba(255,255,255,.85); font-size:.88rem; font-weight:500; position:relative; padding:6px 0;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--gold-500);
+    transition:width .3s ease;
+  }
+  .nav-links a:hover{ color:#fff; }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-right{ display:flex; align-items:center; gap:20px; }
+  .burger{ display:none; flex-direction:column; gap:5px; cursor:pointer; }
+  .burger span{ width:24px; height:2px; background:#fff; display:block; }
 
-/* LOGO */
-.logo{
-    margin-bottom:60px;
-}
+  /* ===== HERO ===== */
+  .hero{
+    position:relative; padding:150px 0 70px; overflow:hidden;
+    background:linear-gradient(160deg,var(--navy-950) 0%, var(--navy-900) 55%, var(--navy-800) 100%);
+    color:#fff;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0; opacity:.5; pointer-events:none;
+    background:radial-gradient(circle at 85% 30%, rgba(214,160,74,.18), transparent 45%);
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1fr 1.15fr; gap:50px; align-items:center; position:relative; z-index:2;
+  }
+  .hero h1{
+    font-size:3.1rem; font-weight:800; line-height:1.12; letter-spacing:-.01em; margin-bottom:22px;
+  }
+  .hero p{ font-size:1.05rem; color:var(--ink-300); max-width:440px; margin-bottom:34px; line-height:1.6; }
+  .hero-actions{ display:flex; gap:16px; flex-wrap:wrap; }
+  .hero-image-wrap{
+    position:relative; border-radius:var(--radius-lg); overflow:hidden; box-shadow:0 30px 60px rgba(0,0,0,.45);
+    transform:perspective(1200px) rotateY(-4deg);
+    transition:transform .6s ease;
+  }
+  .hero-image-wrap:hover{ transform:perspective(1200px) rotateY(0deg); }
+  .hero-image-wrap img{ width:100%; height:420px; object-fit:cover; display:block; }
+  .hero-image-wrap::after{
+    content:''; position:absolute; inset:0; background:linear-gradient(0deg, rgba(10,17,40,.35), transparent 40%);
+  }
 
-.logo img{
-    width:140px;
-}
+  /* ===== STATS ===== */
+  .stats{
+    background:var(--navy-900); border-top:1px solid rgba(255,255,255,.08);
+    padding:38px 0; color:#fff;
+  }
+  .stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+  .stat-item{ display:flex; align-items:center; gap:16px; }
+  .stat-icon{
+    width:46px; height:46px; border-radius:50%; background:rgba(214,160,74,.15);
+    display:flex; align-items:center; justify-content:center; color:var(--gold-500); font-size:1.1rem; flex-shrink:0;
+  }
+  .stat-num{ font-size:1.5rem; font-weight:800; font-family:'Poppins',sans-serif; }
+  .stat-label{ font-size:.72rem; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-300); margin-top:2px; }
 
-/* LINHA VERTICAL (IDENTIDADE) */
-.identity{
-    display:flex;
-    gap:28px;
-}
+  /* ===== ABOUT ===== */
+  .about{ padding:110px 0; background:var(--white); }
+  .about-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+  .about h2{ font-size:2.3rem; font-weight:800; color:var(--navy-950); line-height:1.2; margin-bottom:20px; }
+  .about p{ color:var(--ink-500); line-height:1.75; margin-bottom:30px; max-width:480px; text-align:justify; text-justify:inter-word; }
+  .about-img{ border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-soft); }
+  .about-img img{ width:100%; height:400px; object-fit:cover; transition:transform .6s ease; }
+  .about-img:hover img{ transform:scale(1.06); }
 
-/* LINHA */
-.identity::before{
-    content:'';
-    width:3px;
-    background: linear-gradient(180deg, #2fe88a, transparent);
-    border-radius:3px;
-}
+  /* ===== SECTION HEAD ===== */
+  .section-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+  .section-head h2{ font-size:2.3rem; font-weight:800; color:var(--navy-950); line-height:1.25; }
+  .section-head.light h2{ color:#fff; }
 
-/* CONTEÚDO */
-.content{
-    flex:1;
-}
+  /* ===== SERVICES ===== */
+  .services{ padding:110px 0; background:#fff; }
+  .services-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:22px; }
+  .service-card{
+    text-align:center; padding:34px 18px; border-radius:var(--radius-md); border:1px solid #eef0f5;
+    transition:all .35s ease; cursor:default;
+  }
+  .service-card:hover{
+    transform:translateY(-8px); box-shadow:var(--shadow-soft); border-color:transparent; background:#fff;
+  }
+  .service-icon{
+    width:58px; height:58px; border-radius:50%; background:var(--navy-950); color:var(--gold-500);
+    display:flex; align-items:center; justify-content:center; margin:0 auto 18px; font-size:1.3rem;
+    transition:all .35s ease;
+  }
+  .service-card:hover .service-icon{ background:var(--gold-500); color:var(--navy-950); transform:rotate(8deg) scale(1.05); }
+  .service-card{ position:relative; }
+  .service-card h3{ font-size:1rem; font-weight:700; color:var(--navy-950); margin-bottom:10px; }
+  .service-card p{
+    font-size:.85rem; color:var(--ink-500); line-height:1.6;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
+    min-height:calc(1.6em * 3);
+  }
+  .services-cta{ text-align:center; margin-top:48px; }
 
-/* TITULO */
-.title{
-    font-family:'Sora', sans-serif;
-    font-size:34px;
-    font-weight:700;
-    margin-bottom:10px;
-    letter-spacing:0.5px;
-}
+  /* ===== CARD TOOLTIP (texto completo ao passar o mouse, caso não caiba nas 3 linhas) ===== */
+  .card-tooltip{
+    position:absolute; left:50%; bottom:calc(100% + 12px); transform:translate(-50%,6px);
+    width:240px; max-width:80vw; background:var(--navy-950); color:#fff; text-align:left;
+    font-size:.8rem; line-height:1.55; padding:14px 16px; border-radius:8px;
+    border:1px solid rgba(214,160,74,.4); box-shadow:0 12px 28px rgba(10,17,40,.28);
+    opacity:0; visibility:hidden; pointer-events:none; transition:all .25s ease; z-index:20;
+  }
+  .card-tooltip::after{
+    content:""; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+    border:7px solid transparent; border-top-color:var(--navy-950);
+  }
+  .service-card:hover .card-tooltip{ opacity:1; visibility:visible; transform:translate(-50%,0); pointer-events:auto; }
 
-/* DESCRIÇÃO */
-.subtitle{
-    font-size:16px;
-    color:rgba(255,255,255,0.8);
-    line-height:1.6;
-    margin-bottom:50px;
-}
+  /* ===== PROCESS ===== */
+  .process{ padding:100px 0; background:var(--navy-950); color:#fff; position:relative; }
+  .process-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:20px; position:relative; }
+  .process-step{ text-align:center; padding:0 10px; position:relative; }
+  .step-num{ font-size:.8rem; font-weight:700; color:var(--gold-500); margin-bottom:14px; letter-spacing:.05em; }
+  .step-icon{
+    width:60px; height:60px; border-radius:50%; border:1px solid rgba(255,255,255,.15);
+    background:var(--navy-900); display:flex; align-items:center; justify-content:center;
+    margin:0 auto 18px; font-size:1.3rem; color:var(--gold-500); transition:all .35s ease;
+  }
+  .process-step:hover .step-icon{ background:var(--gold-500); color:var(--navy-950); transform:scale(1.1); }
+  .process-step{ position:relative; }
+  .process-step h3{ font-size:.95rem; font-weight:700; margin-bottom:10px; }
+  .process-step p{
+    font-size:.82rem; color:var(--ink-300); line-height:1.55;
+    display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;
+    min-height:calc(1.55em * 3);
+  }
+  .step-arrow{ position:absolute; top:30px; right:-14px; color:rgba(255,255,255,.25); font-size:1rem; }
 
-/* LINKS SEM CAIXA */
-.links{
-    display:flex;
-    flex-direction:column;
-    gap:26px;
-    margin-bottom:60px;
-}
+  /* ===== CASES ===== */
+  .cases{ padding:110px 0; background:var(--white); }
+  .cases-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px; }
+  .case-card{
+    background:#fff; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-card);
+    transition:all .35s ease;
+  }
+  .case-card:hover{ transform:translateY(-10px); box-shadow:var(--shadow-soft); }
+  .case-img{ position:relative; height:190px; overflow:hidden; }
+  .case-img img{ width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+  .case-card:hover .case-img img{ transform:scale(1.1); }
+  .case-badge{
+    position:absolute; bottom:-22px; left:24px; width:44px; height:44px; border-radius:50%;
+    background:var(--gold-500); color:var(--navy-950); display:flex; align-items:center; justify-content:center;
+    font-size:1.1rem; box-shadow:0 6px 16px rgba(0,0,0,.2);
+  }
+  .case-body{ padding:36px 24px 26px; }
+  .case-body h3{ font-size:1.05rem; font-weight:700; color:var(--navy-950); margin-bottom:10px; }
+  .case-body p{ font-size:.88rem; color:var(--ink-500); line-height:1.6; margin-bottom:16px; }
+  .case-body strong{ color:var(--navy-950); }
+  .case-link{ font-size:.82rem; font-weight:700; color:var(--gold-500); display:inline-flex; align-items:center; gap:6px; }
+  .case-link i{ transition:transform .3s ease; }
+  .case-link:hover i{ transform:translateX(5px); }
+  .cases-cta{ text-align:center; margin-top:48px; }
 
-.links a{
-    text-decoration:none;
-    color:#ffffff;
-    font-size:18px;
-    font-weight:500;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    transition:all 0.3s ease;
-}
+  /* ===== TESTIMONIALS ===== */
+  .testimonials{ padding:100px 0; background:var(--navy-900); color:#fff; }
+  .test-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+  .test-card{
+    background:var(--navy-800); border-radius:var(--radius-md); padding:32px 26px; position:relative;
+    border:1px solid rgba(255,255,255,.06); transition:all .35s ease;
+  }
+  .test-card:hover{ transform:translateY(-6px); border-color:var(--gold-500); }
+  .quote-icon{ color:var(--gold-500); font-size:1.6rem; margin-bottom:14px; opacity:.8; }
+  .test-card p{ font-size:.92rem; color:var(--ink-300); line-height:1.65; margin-bottom:22px; }
+  .test-author{ display:flex; align-items:center; gap:12px; }
+  .test-avatar{
+    width:44px; height:44px; border-radius:50%; object-fit:cover; border:2px solid var(--gold-500);
+  }
+  .test-author strong{ display:block; font-size:.88rem; }
+  .test-author span{ display:block; font-size:.76rem; color:var(--ink-300); }
+  .dots{ display:flex; justify-content:center; gap:8px; margin-top:40px; }
+  .dot{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,.25); cursor:pointer; transition:all .3s ease; }
+  .dot.active{ background:var(--gold-500); width:22px; border-radius:5px; }
 
-.links a i{
-    font-size:20px;
-    color:#2fe88a;
-}
+  /* ===== FAQ ===== */
+  .faq{ padding:110px 0; background:#fff; }
+  .faq-grid{ display:grid; grid-template-columns:1fr 0.85fr; gap:60px; align-items:start; }
+  .faq h2{ font-size:2.1rem; font-weight:800; color:var(--navy-950); margin-bottom:34px; line-height:1.25; }
+  .faq-item{ border-bottom:1px solid #eaecf1; }
+  .faq-q{
+    display:flex; align-items:center; justify-content:space-between; padding:20px 4px;
+    cursor:pointer; font-weight:600; color:var(--navy-950); font-size:.95rem;
+  }
+  .faq-q .icon{
+    width:26px; height:26px; border-radius:50%; border:1px solid #dfe2eb; display:flex; align-items:center;
+    justify-content:center; font-size:.8rem; color:var(--navy-950); flex-shrink:0; transition:all .3s ease;
+  }
+  .faq-item.open .faq-q .icon{ background:var(--gold-500); border-color:var(--gold-500); color:#fff; transform:rotate(45deg); }
+  .faq-a{ max-height:0; overflow:hidden; transition:max-height .4s ease; }
+  .faq-item.open .faq-a{ max-height:200px; }
+  .faq-a p{ padding:0 4px 22px; color:var(--ink-500); font-size:.88rem; line-height:1.65; }
+  .faq-cta{
+    background:var(--navy-950); border-radius:var(--radius-lg); overflow:hidden; position:relative; min-height:340px;
+    display:flex; align-items:flex-end;
+  }
+  .faq-cta img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.55; }
+  .faq-cta-content{ position:relative; z-index:2; padding:34px; color:#fff; background:linear-gradient(0deg, rgba(10,17,40,.95), rgba(10,17,40,.2)); width:100%; }
+  .faq-cta-content .eyebrow{ color:var(--gold-400); }
+  .faq-cta-content h3{ font-size:1.3rem; font-weight:700; margin-bottom:24px; line-height:1.4; }
 
-.links a:hover{
-    transform:translateX(6px);
-    color:#2fe88a;
-}
+  /* ===== CTA BANNER ===== */
+  .cta-banner{ background:var(--navy-950); color:#fff; padding:80px 0; position:relative; overflow:hidden; }
+  .cta-banner::before{
+    content:''; position:absolute; inset:0; background:radial-gradient(circle at 15% 50%, rgba(214,160,74,.12), transparent 50%);
+  }
+  .cta-grid{ display:grid; grid-template-columns:1.2fr 1fr auto; gap:40px; align-items:center; position:relative; z-index:2; }
+  .cta-grid h2{ font-size:1.9rem; font-weight:800; line-height:1.3; }
+  .cta-grid p{ color:var(--ink-300); font-size:.92rem; line-height:1.6; }
+  .stair-text{ display:block; }
+  .stair-text br{ content:''; }
+  .cta-phone{ display:flex; align-items:center; gap:10px; margin-top:16px; color:#fff; font-weight:600; }
+  .cta-phone i{ color:var(--gold-500); }
 
-/* CTA */
-.cta a{
-    display:inline-block;
-    font-size:18px;
-    font-weight:600;
-    color:#2fe88a;
-    text-decoration:none;
-    position:relative;
-    padding-bottom:6px;
-}
+  /* ===== FOOTER ===== */
+  footer{ background:var(--navy-900); color:var(--ink-300); padding:80px 0 24px; border-top:1px solid rgba(255,255,255,.06); }
+  .footer-grid{ display:grid; grid-template-columns:1.6fr 1fr 1fr 1.2fr 1.2fr; gap:36px; margin-bottom:50px; }
+  .footer-col h4{ color:#fff; font-size:.85rem; font-weight:700; margin-bottom:20px; text-transform:uppercase; letter-spacing:.04em; }
+  .footer-col p{ font-size:.85rem; line-height:1.7; margin-top:14px; text-align:justify; text-justify:inter-word; }
+  .footer-col p.stair-text{ text-align:left; }
+  .footer-col ul li{ margin-bottom:12px; }
+  .footer-col ul li a{ font-size:.85rem; transition:color .25s ease, padding-left .25s ease; }
+  .footer-col ul li a:hover{ color:var(--gold-500); padding-left:4px; }
+  .footer-contact li{ display:flex; gap:10px; align-items:flex-start; font-size:.85rem; margin-bottom:14px; }
+  .footer-contact i{ color:var(--gold-500); margin-top:3px; }
+  .social{ display:flex; gap:10px; margin-top:20px; }
+  .social a{
+    width:36px; height:36px; border-radius:50%; border:1px solid rgba(255,255,255,.15);
+    display:flex; align-items:center; justify-content:center; transition:all .3s ease;
+  }
+  .social a:hover{ background:var(--gold-500); border-color:var(--gold-500); color:var(--navy-950); transform:translateY(-3px); }
+  .newsletter-form{ display:flex; margin-top:16px; border-radius:6px; overflow:hidden; }
+  .newsletter-form input{
+    flex:1; border:none; padding:12px 14px; font-size:.82rem; outline:none; background:rgba(255,255,255,.08); color:#fff;
+  }
+  .newsletter-form input::placeholder{ color:var(--ink-300); }
+  .newsletter-form button{
+    background:var(--gold-500); border:none; padding:0 16px; color:var(--navy-950); cursor:pointer; transition:background .3s ease;
+  }
+  .newsletter-form button:hover{ background:var(--gold-400); }
+  .footer-bottom{
+    display:flex; justify-content:space-between; align-items:center; padding-top:24px;
+    border-top:1px solid rgba(255,255,255,.08); font-size:.78rem; flex-wrap:wrap; gap:12px;
+  }
+  .footer-bottom a{ margin-left:20px; transition:color .25s ease; }
+  .footer-bottom a:hover{ color:var(--gold-500); }
 
-.cta a::after{
-    content:'';
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:0%;
-    height:2px;
-    background:#2fe88a;
-    transition:0.3s ease;
-}
+  /* animated counter helper */
+  .stat-num[data-count]{ font-variant-numeric:tabular-nums; }
 
-.cta a:hover::after{
-    width:100%;
-}
-
-/* FOOTER */
-footer{
-    margin-top:70px;
-    font-size:12px;
-    color:rgba(255,255,255,0.5);
-}
-
-/* RESPONSIVO */
-@media(max-width:480px){
-    .title{
-        font-size:28px;
-    }
-
-    .links a{
-        font-size:17px;
-    }
-}
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:1024px){
+    .hero-grid, .about-grid, .faq-grid{ grid-template-columns:1fr; }
+    .hero-image-wrap{ order:-1; }
+    .stats-grid{ grid-template-columns:repeat(2,1fr); gap:28px; }
+    .services-grid{ grid-template-columns:repeat(2,1fr); }
+    .process-grid{ grid-template-columns:repeat(1,1fr); gap:36px; }
+    .step-arrow{ display:none; }
+    .cases-grid, .test-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:repeat(2,1fr); }
+    .cta-grid{ grid-template-columns:1fr; text-align:left; }
+  }
+  @media(max-width:768px){
+    .nav-links{ display:none; }
+    .burger{ display:flex; }
+    .hero h1{ font-size:2.2rem; }
+    .about h2, .section-head h2, .faq h2{ font-size:1.7rem; }
+    .services-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns:1fr; }
+  }
 </style>
 </head>
-
 <body>
 
-<div class="wrapper">
-
-    <!-- LOGO -->
-    <div class="logo">
-        <img src="logo-av2.png.png" alt="AV2COMPANY">
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <nav>
+    <a href="#" class="logo">
+      <img src="logoav2.png" alt="AV2 Company" id="logoav2" class="logo-mark" onerror="this.style.background='linear-gradient(135deg,var(--gold-400),var(--gold-500))'; this.onerror=null; this.removeAttribute('src');">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#inicio">Início</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#cases">Cases</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/5581989685899?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20AV2%20COMPANY." target="_blank" rel="noopener" class="btn btn-gold" style="padding:11px 22px;">Fale Conosco</a>
+      <div class="burger" id="burger"><span></span><span></span><span></span></div>
     </div>
+  </nav>
+</header>
 
-    <div class="identity">
-        <div class="content">
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div class="reveal in">
+      <h1>ESTRATÉGIA QUE<br>GERA RESULTADOS</h1>
+      <p>Consultoria empresarial para empresas que buscam crescer de forma sustentável e inteligente.</p>
+      <div class="hero-actions">
+        <a href="#servicos" class="btn btn-gold">Nossos Serviços</a>
+        <a href="https://wa.me/5581989685899?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20AV2%20COMPANY." target="_blank" rel="noopener" class="btn btn-outline">Agendar Reunião</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap reveal in reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop" alt="Equipe analisando gráficos de crescimento estratégico">
+    </div>
+  </div>
+</section>
 
-            <div class="title">AV2 COMPANY</div>
-            <div class="subtitle">
-                Tráfego Pago | Branding | Marcas
-            </div>
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat-item reveal">
+      <div class="stat-icon"><i class="fa-solid fa-building"></i></div>
+      <div><div class="stat-num" data-count="100">0</div><div class="stat-label">Empresas Atendidas</div></div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+      <div><div class="stat-num" data-count="06">0</div><div class="stat-label">Anos de Mercado</div></div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-icon"><i class="fa-solid fa-sack-dollar"></i></div>
+      <div><div class="stat-num">R$ 300 MIL</div><div class="stat-label">Em Resultados Gerados</div></div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <div><div class="stat-num" data-count="99">0</div><div class="stat-label">De Clientes Satisfeitos</div></div>
+    </div>
+  </div>
+</section>
 
-            <!-- LINKS -->
-            <div class="links">
-                <a href="https://instagram.com/av2company" target="_blank">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="https://www.facebook.com/profile.php?id=61586046003964" target="_blank">
-                    <i class="fab fa-facebook-f"></i> Facebook
-                </a>
-                <a href="https://wa.me/554991864506" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-            </div>
+<!-- ===== ABOUT ===== -->
+<section class="about" id="sobre">
+  <div class="container about-grid">
+    <div class="reveal">
+      <span class="eyebrow">Sobre Nós</span>
+      <h2>Somos Especialistas em Transformar Negócios</h2>
+      <p>A AV2 Company nasceu com o propósito de apoiar empresas a encontrarem caminhos claros para crescer, inovar e se tornarem líderes em seus mercados. Unimos experiência, método e visão de futuro para entregar resultados consistentes e duradouros.</p>
+      <a href="#" class="btn btn-outline-navy">Conheça Nossa História</a>
+    </div>
+    <div class="about-img reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=1100&auto=format&fit=crop" alt="Equipe em reunião">
+    </div>
+  </div>
+</section>
 
-            <!-- CTA -->
-            <div class="cta">
-                <a href="https://wa.me/554991864506" target="_blank">
-                    Falar com um especialista
-                </a>
-            </div>
+<!-- ===== SERVICES ===== -->
+<section class="services" id="servicos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Nossos Serviços</span>
+      <h2>Soluções Completas para Cada Desafio do Seu Negócio</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>Tráfego Pago</h3>
+        <p>Criamos campanhas estratégicas para atrair clientes qualificados e maximizar seu retorno.</p>
+        <div class="card-tooltip">Criamos campanhas estratégicas para atrair clientes qualificados e maximizar seu retorno.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-1">
+        <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+        <h3>Design Gráfico</h3>
+        <p>Criamos identidades visuais que fortalecem a percepção da sua marca no mercado.</p>
+        <div class="card-tooltip">Criamos identidades visuais que fortalecem a percepção da sua marca no mercado.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-2">
+        <div class="service-icon"><i class="fa-solid fa-laptop-code"></i></div>
+        <h3>Web Design</h3>
+        <p>Desenvolvemos sites modernos e responsivos que convertem visitantes em clientes.</p>
+        <div class="card-tooltip">Desenvolvemos sites modernos e responsivos que convertem visitantes em clientes.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-3">
+        <div class="service-icon"><i class="fa-solid fa-people-arrows"></i></div>
+        <h3>CRM</h3>
+        <p>Automatizamos o relacionamento com seus clientes para vender mais e melhor.</p>
+        <div class="card-tooltip">Automatizamos o relacionamento com seus clientes para vender mais e melhor.</div>
+      </div>
+      <div class="service-card reveal reveal-delay-4">
+        <div class="service-icon"><i class="fa-solid fa-hashtag"></i></div>
+        <h3>Gestão de Redes Sociais</h3>
+        <p>Planejamos conteúdo estratégico para engajar sua audiência e gerar clientes.</p>
+        <div class="card-tooltip">Planejamos conteúdo estratégico para engajar sua audiência e gerar clientes.</div>
+      </div>
+    </div>
+    <div class="services-cta reveal">
+      <a href="#" class="btn btn-outline-navy">Ver Todos os Serviços</a>
+    </div>
+  </div>
+</section>
 
+<!-- ===== PROCESS ===== -->
+<section class="process">
+  <div class="container">
+    <div class="section-head light reveal">
+      <span class="eyebrow">Como Trabalhamos</span>
+      <h2>Um Método Comprovado em 5 Etapas</h2>
+    </div>
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <h3>Diagnóstico</h3>
+        <p>Entendemos seu negócio, desafios atuais e oportunidades de crescimento no mercado.</p>
+        <span class="step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      <div class="process-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+        <h3>Planejamento</h3>
+        <p>Desenhamos uma estratégia personalizada, alinhada aos objetivos do seu negócio.</p>
+        <span class="step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      <div class="process-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-icon"><i class="fa-solid fa-person-running"></i></div>
+        <h3>Execução</h3>
+        <p>Colocamos o plano em ação com acompanhamento próximo e ajustes rápidos.</p>
+        <span class="step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      <div class="process-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <h3>Monitoramento</h3>
+        <p>Avaliamos indicadores e resultados para garantir que sua empresa siga no caminho certo.</p>
+        <span class="step-arrow"><i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+      <div class="process-step reveal reveal-delay-4">
+        <div class="step-num">05</div>
+        <div class="step-icon"><i class="fa-solid fa-arrows-spin"></i></div>
+        <h3>Otimização</h3>
+        <p>Ajustamos rotas e refinamos processos para potencializar os resultados alcançados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASES ===== -->
+<section class="cases" id="cases">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Cases de Sucesso</span>
+      <h2>Resultados Que Falam Por Nós</h2>
+    </div>
+    <div class="cases-grid">
+      <div class="case-card reveal">
+        <div class="case-img">
+          <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?q=80&w=800&auto=format&fit=crop" alt="Escritório de Advocacia">
+          <span class="case-badge"><i class="fa-solid fa-scale-balanced"></i></span>
         </div>
+        <div class="case-body">
+          <h3>Escritório de Advocacia</h3>
+          <p>Aumento de <strong>60% no agendamento de consultas</strong> e mais autoridade digital em 6 meses.</p>
+          <a href="#" class="case-link">Ver case completo <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-1">
+        <div class="case-img">
+          <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop" alt="Clínica de Saúde">
+          <span class="case-badge"><i class="fa-solid fa-stethoscope"></i></span>
+        </div>
+        <div class="case-body">
+          <h3>Clínica de Saúde</h3>
+          <p>Crescimento de <strong>45% no agendamento de pacientes</strong> e redução de 30% no custo por lead.</p>
+          <a href="#" class="case-link">Ver case completo <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+      <div class="case-card reveal reveal-delay-2">
+        <div class="case-img">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=800&auto=format&fit=crop" alt="Imobiliária">
+          <span class="case-badge"><i class="fa-solid fa-house"></i></span>
+        </div>
+        <div class="case-body">
+          <h3>Imobiliária</h3>
+          <p>Aumento de <strong>50% nos leads qualificados</strong> e crescimento de 28% nas vendas em 8 meses.</p>
+          <a href="#" class="case-link">Ver case completo <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
     </div>
+    <div class="cases-cta reveal">
+      <a href="#" class="btn btn-outline-navy">Ver Todos os Cases</a>
+    </div>
+  </div>
+</section>
 
-    <footer>
-        © AV2 I TODOS OS DIREITOS RESERVADOS
-    </footer>
+<!-- ===== TESTIMONIALS ===== -->
+<section class="testimonials">
+  <div class="container">
+    <div class="section-head light reveal">
+      <span class="eyebrow">Depoimentos</span>
+      <h2>O Que Nossos Clientes Dizem</h2>
+    </div>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <p>Depois da consultoria, nossa agenda de atendimentos aumentou consideravelmente e ganhamos muito mais autoridade digital no setor jurídico.</p>
+        <div class="test-author">
+          <img class="test-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=200&auto=format&fit=crop" alt="Sócio de escritório de advocacia">
+          <div><strong>Sócio-Diretor</strong><span>Escritório de Advocacia</span></div>
+        </div>
+      </div>
+      <div class="test-card reveal reveal-delay-1">
+        <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <p>Conseguimos reduzir o custo por lead e aumentar o número de pacientes atendidos com uma estratégia muito bem estruturada.</p>
+        <div class="test-author">
+          <img class="test-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop" alt="Gestora de clínica de saúde">
+          <div><strong>Gestora Administrativa</strong><span>Clínica de Saúde</span></div>
+        </div>
+      </div>
+      <div class="test-card reveal reveal-delay-2">
+        <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+        <p>Nossos leads qualificados e vendas de imóveis cresceram de forma consistente graças ao acompanhamento próximo da equipe.</p>
+        <div class="test-author">
+          <img class="test-avatar" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" alt="Corretor de imóveis">
+          <div><strong>Diretor Comercial</strong><span>Imobiliária</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="dots">
+      <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+</section>
 
-</div>
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="container faq-grid">
+    <div>
+      <span class="eyebrow">FAQ</span>
+      <h2 class="reveal">Perguntas Frequentes</h2>
+      <div id="faqList">
+        <div class="faq-item open reveal">
+          <div class="faq-q"><span>Como funciona o trabalho de consultoria?</span><span class="icon"><i class="fa-solid fa-plus"></i></span></div>
+          <div class="faq-a"><p>Começamos com um diagnóstico completo do seu negócio, identificando pontos de melhoria e oportunidades. A partir disso, desenhamos um plano de ação personalizado.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>Quanto tempo leva para ver resultados?</span><span class="icon"><i class="fa-solid fa-plus"></i></span></div>
+          <div class="faq-a"><p>Os primeiros resultados costumam aparecer entre 60 e 90 dias, variando conforme o porte e a complexidade do projeto.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>Vocês atendem empresas de qualquer porte?</span><span class="icon"><i class="fa-solid fa-plus"></i></span></div>
+          <div class="faq-a"><p>Sim! Atendemos desde pequenas empresas em crescimento até grandes corporações, adaptando nossa metodologia a cada realidade.</p></div>
+        </div>
+        <div class="faq-item reveal">
+          <div class="faq-q"><span>Como é feito o acompanhamento dos projetos?</span><span class="icon"><i class="fa-solid fa-plus"></i></span></div>
+          <div class="faq-a"><p>Fazemos reuniões periódicas de acompanhamento, relatórios de indicadores e ajustes contínuos de rota junto com sua equipe.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="faq-cta reveal reveal-delay-2">
+      <img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" alt="Especialista">
+      <div class="faq-cta-content">
+        <span class="eyebrow">Ainda Tem Dúvidas?</span>
+        <h3>Nossa equipe está pronta para te ajudar a encontrar as melhores soluções para o seu negócio.</h3>
+        <a href="#contato" class="btn btn-gold">Fale com um Especialista</a>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ===== CTA BANNER ===== -->
+<section class="cta-banner" id="contato">
+  <div class="container cta-grid">
+    <h2>Vamos Conversar Sobre o Futuro do Seu Negócio?</h2>
+    <p>Agende uma conversa gratuita com um de nossos<br>
+    especialistas e dê o primeiro passo para<br>
+    transformar sua empresa.</p>
+    <div>
+      <a href="https://wa.me/5581989685899?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20AV2%20COMPANY." target="_blank" rel="noopener" class="btn btn-gold">Agendar Reunião</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo" style="margin-bottom:6px;">
+          <img src="logo01.png" alt="AV2 Company" id="logo01" class="logo-mark" onerror="this.style.background='linear-gradient(135deg,var(--gold-400),var(--gold-500))'; this.onerror=null; this.removeAttribute('src');">
+        </a>
+        <p class="stair-text">Transformamos negócios com estratégia,<br>
+        gestão e inovação para gerar<br>
+        resultados sustentáveis.</p>
+        <div class="social">
+          <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.instagram.com/av2company" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=61586046003964" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#inicio">Início</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#cases">Cases</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#">Tráfego Pago</a></li>
+          <li><a href="#">Design Gráfico</a></li>
+          <li><a href="#">Web Design</a></li>
+          <li><a href="#">CRM</a></li>
+          <li><a href="#">Gestão de Redes Sociais</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <ul class="footer-contact">
+          <li><i class="fa-solid fa-envelope"></i> av2company.adm@gmail.com</li>
+          <li><i class="fa-solid fa-location-dot"></i> Atendimento em todo o Brasil</li>
+          <li><i class="fa-brands fa-whatsapp"></i> (81) 9 8968 5899</li>
+          <li><i class="fa-brands fa-instagram"></i> @av2company</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="margin-top:0;">Receba conteúdos exclusivos sobre gestão e estratégia.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('input').value=''; alert('Inscrição realizada com sucesso!');">
+          <input type="email" placeholder="Seu melhor e-mail" required>
+          <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AV2 COMPANY. Todos os direitos reservados.</span>
+      <span><a href="#">Política de Privacidade</a><a href="#">Termos de Uso</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // header scroll style
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // animated counters
+  const counters = document.querySelectorAll('.stat-num[data-count]');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'));
+        let current = 0;
+        const step = Math.max(1, Math.ceil(target / 60));
+        const suffix = el.closest('.stat-item').querySelector('.stat-label').textContent.includes('Satisfeitos') ? '%' : (target === 250 ? '+' : '+');
+        const tick = () => {
+          current += step;
+          if(current >= target){ el.textContent = target + suffix; return; }
+          el.textContent = current + suffix;
+          requestAnimationFrame(tick);
+        };
+        tick();
+        counterIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => counterIO.observe(c));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  // testimonial dots (purely decorative interaction)
+  const dots = document.querySelectorAll('.dot');
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      dots.forEach(d => d.classList.remove('active'));
+      dot.classList.add('active');
+    });
+  });
+
+  // mobile burger -> simple toggle of nav-links as dropdown
+  const burger = document.getElementById('burger');
+  const navLinks = document.querySelector('.nav-links');
+  burger.addEventListener('click', () => {
+    const isOpen = navLinks.style.display === 'flex';
+    navLinks.style.display = isOpen ? 'none' : 'flex';
+    navLinks.style.cssText += isOpen ? '' : `
+      position:absolute; top:100%; left:0; right:0; background:rgba(10,17,40,.98);
+      flex-direction:column; padding:20px 24px; gap:18px;
+    `;
+  });
+</script>
 </body>
 </html>
